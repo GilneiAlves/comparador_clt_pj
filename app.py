@@ -11,9 +11,6 @@ considerando benefícios e encargos.
 Preencha os campos abaixo para personalizar sua simulação.
 """)
 
-# Para simplificar, vamos considerar um desconto médio de 25% (INSS + IR)
-desconto_clt = salario_clt * 0.25
-salario_clt_liquido = salario_clt - desconto_clt + alimentacao + plano_saude
 
 # --- Entradas do usuário ---
 st.sidebar.header("Parâmetros de Entrada")
@@ -25,6 +22,11 @@ plano_saude = st.sidebar.number_input("Plano de saúde (R$)", 0.0, 2000.0, 200.0
 contabilidade = st.sidebar.number_input("Custo contabilidade (R$)", 0.0, 2000.0, 500.0, step=50.0)
 previdencia = st.sidebar.number_input("Previdência (R$)", 0.0, 2000.0, 300.0, step=50.0)
 aliquota_simples = st.sidebar.slider("Alíquota Simples Nacional (%)", 0.0, 30.0, 10.0, step=0.5)
+
+# Para simplificar, vamos considerar um desconto médio de 25% (INSS + IR)
+desconto_clt = salario_clt * 0.25
+salario_clt_liquido = salario_clt - desconto_clt + alimentacao + plano_saude
+
 
 # --- Cálculos ---
 # Benefícios CLT (13º + férias + 1/3)
