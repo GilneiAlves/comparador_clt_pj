@@ -122,7 +122,7 @@ with col1:
     st.markdown(f"(-) INSS: R$ {desconto_inss:,.2f}")
     st.markdown(f"(-) IRRF: R$ {desconto_irrf:,.2f}")
     st.metric("Salário CLT Líquido + Benefícios", f"R$ {salario_clt_liquido_com_beneficios:,.2f}", delta_color="off")
-    st.metric("Custo Total Mensal para a Empresa", f"R$ {custo_mensal_clt_para_empresa:,.2f}")
+    #st.metric("Custo Total Mensal para a Empresa", f"R$ {custo_mensal_clt_para_empresa:,.2f}")
 
 
 with col2:
