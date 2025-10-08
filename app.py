@@ -35,9 +35,12 @@ def calcular_inss(salario_bruto):
     return min(desconto_total, 951.62)
 
 
-def calcular_irrf(salario_bruto, desconto_inss):
-    """Calcula o desconto do IRRF para 2025."""
-    base_calculo = salario_bruto - desconto_inss
+def calcular_irrf(salario_bruto, desconto_inss, num_dependentes):
+    """Calcula o desconto do IRRF para 2025, considerando dependentes."""
+    deducao_por_dependente = 189.59
+    deducao_total_dependentes = num_dependentes * deducao_por_dependente
+    
+    base_calculo = salario_bruto - desconto_inss - deducao_total_dependentes
 
     if base_calculo <= 2259.20:
         return 0.0
@@ -62,11 +65,13 @@ Preencha os campos ao lado para personalizar sua simulação.
 """)
 
 # --- Entradas do usuário ---
-st.sidebar.header("Parâmetros de Entrada")
+st.sidebar.header("Parâmetros de Entrada CLT")
 
 salario_clt = st.sidebar.number_input("Salário bruto CLT (R$)", 0.0, 100000.0, 11100.0, step=500.0)
 alimentacao = st.sidebar.number_input("Benefício alimentação (R$)", 0.0, 5000.0, 1100.0, step=100.0)
 plano_saude = st.sidebar.number_input("Plano de saúde (R$)", 0.0, 2000.0, 200.0, step=50.0)
+num_dependentes = st.sidebar.number_input("Número de dependentes", 0, 20, 0, step=1)
+
 
 st.sidebar.header("Custos como PJ")
 contabilidade = st.sidebar.number_input("Custo contabilidade (R$)", 0.0, 2000.0, 500.0, step=50.0)
@@ -77,7 +82,7 @@ aliquota_simples = st.sidebar.slider("Alíquota Simples Nacional (%)", 0.0, 30.0
 # --- Cálculos CLT ---
 # Descontos
 desconto_inss = calcular_inss(salario_clt)
-desconto_irrf = calcular_irrf(salario_clt, desconto_inss)
+desconto_irrf = calcular_irrf(salario_clt, desconto_inss, num_dependentes)
 descontos_clt_total = desconto_inss + desconto_irrf
 
 # Salário Líquido
@@ -139,4 +144,3 @@ st.bar_chart(dados.set_index("Categoria"))
 st.markdown("---")
 st.caption("Desenvolvido em Python + Streamlit por Gilnei Alves de Freitas")
 st.markdown("[linkedin-Gilnei](https://www.linkedin.com/in/gilnei-freitas/ )")
-
