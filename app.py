@@ -139,7 +139,33 @@ dados = pd.DataFrame({
     "Valor (R$)": [salario_clt_liquido_com_beneficios, salario_pj_liquido]
 })
 
-st.bar_chart(dados.set_index("Categoria"))
+# Cria o gráfico de barras com Altair
+bars = alt.Chart(dados).mark_bar().encode(
+    x=alt.X('Categoria:N', title=None, sort=None), # Categoria no eixo X, sem título e sem ordenação
+    y=alt.Y('Valor (R$):Q', title="Valor (R$)"), # Valor no eixo Y
+    color=alt.Color('Categoria:N', legend=None) # Cores diferentes para cada categoria, sem legenda
+).properties(
+    width=600 # Largura do gráfico
+)
+
+# Cria os rótulos de texto
+labels = bars.mark_text(
+    align='center',
+    baseline='bottom',
+    dy=-5  # Deslocamento vertical para ficar acima da barra
+).encode(
+    text=alt.Text('Valor (R$):Q', format='R$,.2f') # Formata o texto como moeda
+)
+
+# Combina as barras e os rótulos e exibe no Streamlit
+chart = (bars + labels).configure_axis(
+    labelAngle=0 # Mantém os rótulos do eixo X na horizontal
+).configure_view(
+    stroke=None # Remove a borda ao redor do gráfico
+)
+
+st.altair_chart(chart, use_container_width=True)
+
 
 st.markdown("---")
 st.caption("Desenvolvido em Python + Streamlit por Gilnei Alves de Freitas")
