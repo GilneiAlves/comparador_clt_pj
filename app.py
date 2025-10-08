@@ -93,7 +93,7 @@ desconto_irrf = calcular_irrf(salario_clt, desconto_inss, num_dependentes)
 descontos_clt_total = desconto_inss + desconto_irrf
 
 # Salário Líquido
-salario_clt_liquido = salario_clt - descontos_clt_total - Transporte_clt
+salario_clt_liquido = salario_clt - descontos_clt_total - transporte_clt
 salario_clt_liquido_com_beneficios = salario_clt_liquido + alimentacao + plano_saude
 
 # Encargos e Benefícios anuais pagos pelo empregador
