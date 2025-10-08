@@ -59,8 +59,8 @@ st.set_page_config(
     page_title="Comparador CLT vs PJ", 
     page_icon="💼", 
     layout="wide",  # usar o layout "wide"
-    initial_sidebar_state="expanded",
-    layout="centered")
+    initial_sidebar_state="expanded")
+    #,layout="centered")
 
 st.title("Simulador: CLT vs PJ")
 
