@@ -52,7 +52,7 @@ st.subheader("Resultados da Simulação")
 col1, col2 = st.columns(2)
 
 with col1:
-    st.metric("Sálario CLT)", f"R$ {salario_clt:,.2f}")
+    st.metric("Sálario CLT", f"R$ {salario_clt:,.2f}")
     st.metric("Custo total CLT (mensal)", f"R$ {custo_total_clt:,.2f}")
     st.metric("Salário CLT líquido estimado", f"R$ {salario_clt_liquido:,.2f}")
 
