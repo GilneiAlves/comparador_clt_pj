@@ -55,7 +55,12 @@ def calcular_irrf(salario_bruto, desconto_inss, num_dependentes):
         return (base_calculo * 0.275) - 896.00
 
 # --- Configuração da Página ---
-st.set_page_config(page_title="Comparador CLT vs PJ", page_icon="💼", layout="centered")
+st.set_page_config(
+    page_title="Comparador CLT vs PJ", 
+    page_icon="💼", 
+    layout="wide",  # usar o layout "wide"
+    initial_sidebar_state="expanded",
+    layout="centered")
 
 st.title("Simulador: CLT vs PJ")
 
