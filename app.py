@@ -76,6 +76,9 @@ Os cálculos consideram:
 O objetivo é estimar quanto uma empresa gastaria para manter um colaborador CLT e qual seria o **salário PJ bruto equivalente** para igualar esse custo — além de exibir o **valor líquido final** em cada modalidade.
 
 Use os controles na barra lateral para personalizar a simulação conforme seu cenário.
+
+*Esta aplicação está em constante aprimoramento.*  
+Em breve serão incluídos novos parâmetros e cenários para uma simulação ainda mais precisa.
 """)
 
 # --- Entradas do usuário ---
