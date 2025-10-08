@@ -140,29 +140,37 @@ dados = pd.DataFrame({
     "Valor (R$)": [salario_clt_liquido_com_beneficios, salario_pj_liquido]
 })
 
-# Cria o gráfico de barras com Altair
-bars = alt.Chart(dados).mark_bar().encode(
-    # CORREÇÃO: Removido 'title=None' e 'axis=None' para exibir os rótulos do eixo X
-    x=alt.X('Categoria:N', sort=None, title=None, axis=alt.Axis(labels=True, ticks=False, domain=False)),
-    # CORREÇÃO: Garante que o título do eixo Y seja exibido
-    y=alt.Y('Valor (R$):Q', title="Valor Líquido (R$)"),
-    color=alt.Color('Categoria:N', legend=None)
+# --- CORREÇÃO DEFINITIVA DO GRÁFICO ---
+
+# 1. Gráfico de Barras (base)
+#    - Eixo X: Define o campo 'Categoria', tipo Nominal ('N'), e o título do eixo.
+#    - Eixo Y: Define o campo 'Valor (R$)', tipo Quantitativo ('Q'), e o título do eixo.
+bars = alt.Chart(dados).mark_bar(size=80).encode(
+    x=alt.X('Categoria:N', title='Modalidade de Contratação', sort=None),
+    y=alt.Y('Valor (R$):Q', title='Valor Líquido Mensal (R$)'),
+    color=alt.Color('Categoria:N', legend=None) # Remove a legenda de cor, pois o eixo X já é claro
 )
 
-# Cria os rótulos de texto (sem alteração aqui)
+# 2. Rótulos de Texto (valores sobre as barras)
+#    - dy: Desloca o texto um pouco para cima da barra.
+#    - text: Define o campo a ser exibido e formata como moeda.
 labels = bars.mark_text(
     align='center',
     baseline='bottom',
-    dy=-8,
+    dy=-10,
     fontSize=14,
-    color='black'
+    fontWeight='bold'
 ).encode(
     text=alt.Text('Valor (R$):Q', format='R$,.2f')
 )
 
-# Combina as barras e os rótulos
-chart = (bars + labels).configure_view(
-    stroke=None # Remove a borda ao redor do gráfico
+# 3. Combina barras e rótulos e exibe no Streamlit
+#    - .configure_axis(labelAngle=0): Garante que os rótulos do eixo X fiquem na horizontal.
+#    - .configure_view(stroke=None): Remove a borda externa do gráfico.
+chart = (bars + labels).configure_axis(
+    labelAngle=0
+).configure_view(
+    stroke=None
 )
 
 st.altair_chart(chart, use_container_width=True)
