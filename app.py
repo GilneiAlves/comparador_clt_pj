@@ -131,6 +131,7 @@ with col1:
     st.markdown(f"(-) deslocamento: R$ {transporte_clt:,.2f}")
     st.markdown(f"(-) Custos Total: R$ {transporte_clt + desconto_irrf + desconto_inss:,.2f}")
     st.metric("Salário CLT Líquido + Benefícios", f"R$ {salario_clt_liquido_com_beneficios:,.2f}", delta_color="off")
+    st.metric("Salário anual CLT Líquido + Benefícios", f"R$ {salario_clt_liquido_com_beneficios * 12:,.2f}", delta_color="off")
     #st.metric("Custo Total Mensal para a Empresa", f"R$ {custo_mensal_clt_para_empresa:,.2f}")
 
 
@@ -142,6 +143,7 @@ with col2:
     st.markdown(f"(-) Custos Total: R$ {contabilidade + previdencia_pj + transporte_pj + imposto_simples:,.2f}")
     
     st.metric("Salário PJ Líquido Estimado", f"R$ {salario_pj_liquido:,.2f}", delta_color="off")
+    st.metric("Salário Annual PJ Líquido Estimado", f"R$ {salario_pj_liquido * 12:,.2f}", delta_color="off")
 
 
 # --- Comparativo gráfico ---
