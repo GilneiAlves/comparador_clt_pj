@@ -153,6 +153,7 @@ fig.add_trace(go.Bar(
     hovertemplate='%{x}<br><b>R$ %{y:,.2f}</b><extra></extra>',
 ))
 
+y_max = dados["Valor (R$)"].max() + 1000
 # Layout geral
 fig.update_layout(
     title={
@@ -163,7 +164,10 @@ fig.update_layout(
     },
     xaxis_title='Modalidade de Contratação',
     yaxis_title='Valor Líquido Mensal (R$)',
-    yaxis=dict(showgrid=False),
+        yaxis=dict(
+        showgrid=False,
+        range=[0, y_max]  # adiciona a margem
+    ),
     xaxis=dict(showgrid=False),
     plot_bgcolor='rgba(0,0,0,0)',
     paper_bgcolor='rgba(0,0,0,0)',
