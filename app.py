@@ -83,8 +83,8 @@ transporte_clt = st.sidebar.number_input("Custo deslocamento CLT (R$)", 0.0, 200
 st.sidebar.header("Custos como PJ")
 contabilidade = st.sidebar.number_input("Custo contabilidade (R$)", 0.0, 2000.0, 500.0, step=50.0)
 previdencia_pj = st.sidebar.number_input("Previdência Privada (PJ, opcional) (R$)", 0.0, 2000.0, 300.0, step=50.0)
-aliquota_simples = st.sidebar.slider("Alíquota Simples Nacional (%)", 0.0, 30.0, 10.0, step=0.5)
 transporte_pj = st.sidebar.number_input("Custo deslocamento PJ (R$)", 0.0, 2000.0, 800.0, step=50.0)
+aliquota_simples = st.sidebar.slider("Alíquota Simples Nacional (%)", 0.0, 30.0, 10.0, step=0.5)
 
 # --- Cálculos CLT ---
 # Descontos
