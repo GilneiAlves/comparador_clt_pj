@@ -11,6 +11,10 @@ considerando benefícios e encargos.
 Preencha os campos abaixo para personalizar sua simulação.
 """)
 
+# Para simplificar, vamos considerar um desconto médio de 25% (INSS + IR)
+desconto_clt = salario_clt * 0.25
+salario_clt_liquido = salario_clt - desconto_clt + alimentacao + plano_saude
+
 # --- Entradas do usuário ---
 st.sidebar.header("Parâmetros de Entrada")
 
@@ -48,7 +52,7 @@ col1, col2 = st.columns(2)
 with col1:
     st.metric("Custo total CLT (mensal)", f"R$ {custo_total_clt:,.2f}")
     st.metric("FGTS mensal", f"R$ {fgts_mensal:,.2f}")
-    st.metric("Benefícios mensais (13º + férias)", f"R$ {beneficios_mensais - salario_clt:,.2f}")
+    st.metric("Sálario CLT)", f"R$ {salario_clt:,.2f}")
 
 with col2:
     st.metric("Salário PJ equivalente bruto", f"R$ {salario_pj_equivalente:,.2f}")
@@ -57,8 +61,8 @@ with col2:
 
 # --- Comparativo gráfico ---
 dados = pd.DataFrame({
-    "Categoria": ["Custo CLT", "PJ Líquido"],
-    "Valor (R$)": [custo_total_clt, pj_liquido]
+    "Categoria": ["CLT Líquido", "PJ Líquido"],
+    "Valor (R$)": [salario_clt_liquido, pj_liquido]
 })
 
 
