@@ -71,4 +71,5 @@ dados = pd.DataFrame({
 st.bar_chart(dados.set_index("Categoria"))
 
 st.markdown("---")
-st.caption("Desenvolvido em Python + Streamlit")
+st.caption("Desenvolvido em Python + Streamlit por Gilnei Alves de Freitas")
+st.markdown("[linkedin-Gilnei](https://www.linkedin.com/in/gilnei-freitas/)")
