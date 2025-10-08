@@ -22,3 +22,8 @@ contabilidade = st.sidebar.number_input("Custo contabilidade (R$)", 0.0, 2000.0,
 previdencia = st.sidebar.number_input("Previdência (R$)", 0.0, 2000.0, 300.0, step=50.0)
 aliquota_simples = st.sidebar.slider("Alíquota Simples Nacional (%)", 0.0, 30.0, 10.0, step=0.5)
 
+# --- Cálculos ---
+# Benefícios CLT (13º + férias + 1/3)
+beneficios_anuais = salario_clt + (salario_clt * 1/3) + salario_clt
+beneficios_mensais = beneficios_anuais / 12
+fgts_mensal = salario_clt * 0.08
