@@ -60,3 +60,9 @@ dados = pd.DataFrame({
     "Categoria": ["Custo CLT", "PJ Líquido"],
     "Valor (R$)": [custo_total_clt, pj_liquido]
 })
+
+
+st.bar_chart(dados.set_index("Categoria"))
+
+st.markdown("---")
+st.caption("Desenvolvido em Python + Streamlit")
