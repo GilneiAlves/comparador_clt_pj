@@ -140,7 +140,7 @@ dados = pd.DataFrame({
     "Valor (R$)": [salario_clt_liquido_com_beneficios, salario_pj_liquido]
 })
 
-# --- CORREÇÃO DEFINITIVA DO GRÁFICO ---
+
 
 # 1. Gráfico de Barras (base)
 #    - Eixo X: Define o campo 'Categoria', tipo Nominal ('N'), e o título do eixo.
