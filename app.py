@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import altair as alt
-
+import plotly.graph_objects as go
 # --- Funções de Cálculo de Impostos ---
 
 def calcular_inss(salario_bruto):
@@ -141,39 +141,36 @@ dados = pd.DataFrame({
 })
 
 
+fig = go.Figure()
 
-# 1. Gráfico de Barras (base)
-#    - Eixo X: Define o campo 'Categoria', tipo Nominal ('N'), e o título do eixo.
-#    - Eixo Y: Define o campo 'Valor (R$)', tipo Quantitativo ('Q'), e o título do eixo.
-bars = alt.Chart(dados).mark_bar(size=80).encode(
-    x=alt.X('Categoria:N', title='Modalidade de Contratação', sort=None),
-    y=alt.Y('Valor (R$):Q', title='Valor Líquido Mensal (R$)'),
-    color=alt.Color('Categoria:N', legend=None) # Remove a legenda de cor, pois o eixo X já é claro
+# Adiciona as barras
+fig.add_trace(go.Bar(
+    x=dados["Categoria"],
+    y=dados["Valor (R$)"],
+    text=[f"R$ {v:,.2f}" for v in dados["Valor (R$)"]],
+    textposition='outside',   # Exibe o rótulo acima das barras
+    marker_color=['#1f77b4', '#2ca02c'],  # cores personalizadas (CLT e PJ)
+    hovertemplate='%{x}<br><b>R$ %{y:,.2f}</b><extra></extra>',
+))
+
+# Layout geral
+fig.update_layout(
+    title={
+        'text': ' Comparativo de Modalidades de Contratação',
+        'x': 0.5,
+        'xanchor': 'center',
+        'font': {'size': 20}
+    },
+    xaxis_title='Modalidade de Contratação',
+    yaxis_title='Valor Líquido Mensal (R$)',
+    yaxis=dict(showgrid=False),
+    xaxis=dict(showgrid=False),
+    plot_bgcolor='rgba(0,0,0,0)',
+    paper_bgcolor='rgba(0,0,0,0)',
+    font=dict(size=14),
 )
 
-# 2. Rótulos de Texto (valores sobre as barras)
-#    - dy: Desloca o texto um pouco para cima da barra.
-#    - text: Define o campo a ser exibido e formata como moeda.
-labels = bars.mark_text(
-    align='center',
-    baseline='bottom',
-    dy=-10,
-    fontSize=14,
-    fontWeight='bold'
-).encode(
-    text=alt.Text('Valor (R$):Q', format='R$,.2f')
-)
-
-# 3. Combina barras e rótulos e exibe no Streamlit
-#    - .configure_axis(labelAngle=0): Garante que os rótulos do eixo X fiquem na horizontal.
-#    - .configure_view(stroke=None): Remove a borda externa do gráfico.
-chart = (bars + labels).configure_axis(
-    labelAngle=0
-).configure_view(
-    stroke=None
-)
-
-st.altair_chart(chart, use_container_width=True)
+st.plotly_chart(fig, use_container_width=True)
 
 st.markdown("---")
 st.caption("Desenvolvido em Python + Streamlit por Gilnei Alves de Freitas")
