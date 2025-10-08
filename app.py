@@ -27,3 +27,14 @@ aliquota_simples = st.sidebar.slider("Alíquota Simples Nacional (%)", 0.0, 30.0
 beneficios_anuais = salario_clt + (salario_clt * 1/3) + salario_clt
 beneficios_mensais = beneficios_anuais / 12
 fgts_mensal = salario_clt * 0.08
+
+# Custo total mensal CLT
+custo_total_clt = salario_clt + alimentacao + plano_saude + fgts_mensal + (beneficios_mensais - salario_clt)
+
+# Salário PJ equivalente bruto
+salario_pj_equivalente = custo_total_clt + salario_clt
+
+# Custos PJ
+simples_nacional = salario_pj_equivalente * (aliquota_simples / 100)
+custo_pj = contabilidade + previdencia + simples_nacional
+pj_liquido = salario_pj_equivalente - custo_pj
