@@ -77,13 +77,14 @@ salario_clt = st.sidebar.number_input("Salário bruto CLT (R$)", 0.0, 100000.0, 
 alimentacao = st.sidebar.number_input("Benefício alimentação (R$)", 0.0, 5000.0, 1000.0, step=100.0)
 plano_saude = st.sidebar.number_input("Plano de saúde (R$)", 0.0, 2000.0, 200.0, step=50.0)
 num_dependentes = st.sidebar.number_input("Número de dependentes", 0, 20, 0, step=1)
+Transporte_clt = st.sidebar.number_input("Custo deslocamento (R$)", 0.0, 2000.0, 800.0, step=50.0)
 
 
 st.sidebar.header("Custos como PJ")
 contabilidade = st.sidebar.number_input("Custo contabilidade (R$)", 0.0, 2000.0, 500.0, step=50.0)
 previdencia_pj = st.sidebar.number_input("Previdência Privada (PJ, opcional) (R$)", 0.0, 2000.0, 300.0, step=50.0)
 aliquota_simples = st.sidebar.slider("Alíquota Simples Nacional (%)", 0.0, 30.0, 10.0, step=0.5)
-
+transporte_pj = st.sidebar.number_input("Custo deslocamento (R$)", 0.0, 2000.0, 800.0, step=50.0)
 
 # --- Cálculos CLT ---
 # Descontos
@@ -92,7 +93,7 @@ desconto_irrf = calcular_irrf(salario_clt, desconto_inss, num_dependentes)
 descontos_clt_total = desconto_inss + desconto_irrf
 
 # Salário Líquido
-salario_clt_liquido = salario_clt - descontos_clt_total
+salario_clt_liquido = salario_clt - descontos_clt_total - Transporte_clt
 salario_clt_liquido_com_beneficios = salario_clt_liquido + alimentacao + plano_saude
 
 # Encargos e Benefícios anuais pagos pelo empregador
@@ -115,7 +116,7 @@ salario_pj_bruto_equivalente = custo_mensal_clt_para_empresa
 # Custos do PJ
 imposto_simples = salario_pj_bruto_equivalente * (aliquota_simples / 100)
 custos_pj_total = contabilidade + previdencia_pj + imposto_simples
-salario_pj_liquido = salario_pj_bruto_equivalente - custos_pj_total
+salario_pj_liquido = salario_pj_bruto_equivalente - custos_pj_total - transporte_pj
 
 
 # --- Resultados ---
@@ -127,6 +128,7 @@ with col1:
     st.metric("Salário Bruto CLT", f"R$ {salario_clt:,.2f}")
     st.markdown(f"(-) INSS: R$ {desconto_inss:,.2f}")
     st.markdown(f"(-) IRRF: R$ {desconto_irrf:,.2f}")
+    st.markdown(f"(-) IRRF: R$ {transporte_clt:,.2f}")
     st.metric("Salário CLT Líquido + Benefícios", f"R$ {salario_clt_liquido_com_beneficios:,.2f}", delta_color="off")
     #st.metric("Custo Total Mensal para a Empresa", f"R$ {custo_mensal_clt_para_empresa:,.2f}")
 
@@ -134,7 +136,8 @@ with col1:
 with col2:
     st.metric("Salário PJ Bruto Equivalente", f"R$ {salario_pj_bruto_equivalente:,.2f}")
     st.markdown(f"(-) Imposto Simples: R$ {imposto_simples:,.2f}")
-    st.markdown(f"(-) Outros Custos: R$ {contabilidade + previdencia_pj:,.2f}")
+    st.markdown(f"(-) Outros Custos: R$ {contabilidade + previdencia_pj + transporte_pj:,.2f}")
+    
     st.metric("Salário PJ Líquido Estimado", f"R$ {salario_pj_liquido:,.2f}", delta_color="off")
 
 
