@@ -138,7 +138,7 @@ with col2:
     st.metric("Salário PJ Bruto Equivalente", f"R$ {salario_pj_bruto_equivalente:,.2f}")
     st.markdown(f"(-) Imposto Simples: R$ {imposto_simples:,.2f}")
     st.markdown(f"(-) deslocamento: R$ {transporte_pj:,.2f}")
-    st.markdown(f"(-) Previdência: R$ {previdencia_pj:,.2f}")
+    st.markdown(f"(-) Outros custos: R$ {previdencia_pj + contabilidade:,.2f}")
     st.markdown(f"(-) Custos Total: R$ {contabilidade + previdencia_pj + transporte_pj:,.2f}")
     
     st.metric("Salário PJ Líquido Estimado", f"R$ {salario_pj_liquido:,.2f}", delta_color="off")
