@@ -65,9 +65,17 @@ st.set_page_config(
 st.title("Simulador: CLT vs PJ")
 
 st.markdown("""
-Este simulador estima o **salário equivalente como PJ** a partir de um salário CLT,
-considerando benefícios e encargos de forma mais precisa.
-Preencha os campos ao lado para personalizar sua simulação.
+Este simulador calcula e compara o **valor líquido mensal estimado** entre contratação **CLT e PJ**.
+
+Os cálculos consideram:
+- **Salário bruto CLT**, com descontos de **INSS** e **IRRF** conforme as faixas vigentes de 2025.  
+- **13º salário**, **férias + 1/3** e **FGTS (8%)**, incorporados ao custo mensal da empresa.  
+- **Benefícios CLT** como alimentação e plano de saúde.  
+- **Custos do PJ**, incluindo **contabilidade**, **Simples Nacional**, **previdência privada** e **custos de deslocamento**.  
+
+O objetivo é estimar quanto uma empresa gastaria para manter um colaborador CLT e qual seria o **salário PJ bruto equivalente** para igualar esse custo — além de exibir o **valor líquido final** em cada modalidade.
+
+Use os controles na barra lateral para personalizar a simulação conforme seu cenário.
 """)
 
 # --- Entradas do usuário ---
