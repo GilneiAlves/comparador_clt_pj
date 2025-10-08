@@ -77,14 +77,14 @@ salario_clt = st.sidebar.number_input("Salário bruto CLT (R$)", 0.0, 100000.0, 
 alimentacao = st.sidebar.number_input("Benefício alimentação (R$)", 0.0, 5000.0, 1000.0, step=100.0)
 plano_saude = st.sidebar.number_input("Plano de saúde (R$)", 0.0, 2000.0, 200.0, step=50.0)
 num_dependentes = st.sidebar.number_input("Número de dependentes", 0, 20, 0, step=1)
-Transporte_clt = st.sidebar.number_input("Custo deslocamento (R$)", 0.0, 2000.0, 800.0, step=50.0)
+Transporte_clt = st.sidebar.number_input("Custo deslocamento CLT (R$)", 0.0, 2000.0, 800.0, step=50.0)
 
 
 st.sidebar.header("Custos como PJ")
 contabilidade = st.sidebar.number_input("Custo contabilidade (R$)", 0.0, 2000.0, 500.0, step=50.0)
 previdencia_pj = st.sidebar.number_input("Previdência Privada (PJ, opcional) (R$)", 0.0, 2000.0, 300.0, step=50.0)
 aliquota_simples = st.sidebar.slider("Alíquota Simples Nacional (%)", 0.0, 30.0, 10.0, step=0.5)
-transporte_pj = st.sidebar.number_input("Custo deslocamento (R$)", 0.0, 2000.0, 800.0, step=50.0)
+transporte_pj = st.sidebar.number_input("Custo deslocamento PJ (R$)", 0.0, 2000.0, 800.0, step=50.0)
 
 # --- Cálculos CLT ---
 # Descontos
