@@ -8,7 +8,7 @@ st.title("Simulador: CLT vs PJ")
 st.markdown("""
 Este simulador estima o **salário equivalente como PJ** a partir de um salário CLT,
 considerando benefícios e encargos.  
-Preencha os campos abaixo para personalizar sua simulação.
+Preencha os campos ao lado para personalizar sua simulação.
 """)
 
 
