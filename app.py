@@ -153,7 +153,7 @@ fig.add_trace(go.Bar(
     hovertemplate='%{x}<br><b>R$ %{y:,.2f}</b><extra></extra>',
 ))
 
-y_max = dados["Valor (R$)"].max() + 1000
+y_max = dados["Valor (R$)"].max() + 2000
 # Layout geral
 fig.update_layout(
     title={
