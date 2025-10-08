@@ -77,7 +77,7 @@ salario_clt = st.sidebar.number_input("Salário bruto CLT (R$)", 0.0, 100000.0, 
 alimentacao = st.sidebar.number_input("Benefício alimentação (R$)", 0.0, 5000.0, 1000.0, step=100.0)
 plano_saude = st.sidebar.number_input("Plano de saúde (R$)", 0.0, 2000.0, 200.0, step=50.0)
 num_dependentes = st.sidebar.number_input("Número de dependentes", 0, 20, 0, step=1)
-Transporte_clt = st.sidebar.number_input("Custo deslocamento CLT (R$)", 0.0, 2000.0, 800.0, step=50.0)
+transporte_clt = st.sidebar.number_input("Custo deslocamento CLT (R$)", 0.0, 2000.0, 800.0, step=50.0)
 
 
 st.sidebar.header("Custos como PJ")
