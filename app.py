@@ -75,7 +75,7 @@ transporte_clt = st.sidebar.number_input("Custo deslocamento CLT (R$)", 0.0, 200
 
 st.sidebar.header("Custos como PJ")
 contabilidade = st.sidebar.number_input("Custo contabilidade (R$)", 0.0, 2000.0, 500.0, step=50.0)
-previdencia_pj = st.sidebar.number_input("Previdência Privada (PJ, opcional) (R$)", 0.0, 2000.0, 300.0, step=50.0)
+Outros_custos = st.sidebar.number_input("Custos diversos (PJ, opcional) (R$)", 0.0, 2000.0, 300.0, step=50.0)
 transporte_pj = st.sidebar.number_input("Custo deslocamento PJ (R$)", 0.0, 2000.0, 800.0, step=50.0)
 aliquota_simples = st.sidebar.slider("Alíquota Simples Nacional (%)", 0.0, 30.0, 6.0, 0.5)
 
@@ -93,39 +93,6 @@ salario_clt_liquido_com_beneficios = salario_clt - descontos_clt_total + aliment
 decimo_terceiro_mensal = salario_clt / 12
 terco_ferias_mensal = (salario_clt / 3) / 12
 fgts_mensal = salario_clt * 0.08
-
-# 2. Soma de todos os custos que o PJ terá que arcar
-custos_clt_perdidos = (decimo_terceiro_mensal + terco_ferias_mensal + fgts_mensal + 
-                       alimentacao + plano_saude)
-novos_custos_pj = contabilidade + previdencia_pj + transporte_pj
-
-# Soma total dos custos que o PJ assume (equivalente a SUM(D6:D17) da planilha)
-soma_custos_pj = custos_clt_perdidos + novos_custos_pj
-
-# 3. Implementação da fórmula do Excel para achar o Salário PJ Mínimo
-aliquota = aliquota_simples / 100.0
-redutor = 0.65
-liquido_alvo = salario_clt_liquido_com_beneficios # O líquido que queremos alcançar
-
-# Fórmula principal (parte 1)
-salario_pj_teorico = (liquido_alvo - soma_custos_pj) / (1 - aliquota)
-
-# Lógica condicional (IF)
-if salario_pj_teorico >= LIMITE_SIMPLES_MENSAL:
-    salario_pj_bruto_equivalente = salario_pj_teorico
-else:
-    denominador_ajustado = (1 - aliquota * redutor)
-    if denominador_ajustado > 0:
-        salario_pj_bruto_equivalente = ((liquido_alvo - soma_custos_pj) / denominador_ajustado) + (LIMITE_MEI_MENSAL / denominador_ajustado)
-    else:
-        salario_pj_bruto_equivalente = 0 # Evita divisão por zero
-
-# 4. Cálculo do líquido final do PJ com base no salário bruto encontrado
-imposto_simples = salario_pj_bruto_equivalente * aliquota
-salario_pj_liquido = salario_pj_bruto_equivalente - soma_custos_pj - imposto_simples
-
-# --- FIM DA NOVA LÓGICA DE CÁLCULO PJ ---
-
 
 # --- Resultados ---
 st.subheader("Resultados da Simulação")
