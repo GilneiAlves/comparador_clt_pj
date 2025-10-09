@@ -7,7 +7,7 @@ LIMITE_MEI_MENSAL = 6750.00
 # Limite mensal simbólico para a regra de cálculo. Ajuste se necessário.
 LIMITE_SIMPLES_MENSAL = 30000.00 
 
-# --- Funções de Cálculo de Impostos (sem alteração) ---
+# --- Funções de Cálculo de Impostos
 def calcular_inss(salario_bruto):
     """Calcula o desconto do INSS de forma progressiva para 2025."""
     teto_inss = 8157.41
@@ -47,7 +47,7 @@ def calcular_irrf(salario_bruto, desconto_inss, num_dependentes):
 # --- Configuração da Página ---
 st.set_page_config(page_title="Comparador CLT vs PJ", page_icon="💼", layout="wide")
 st.title("Simulador: CLT vs PJ")
-# (Seu markdown de introdução permanece o mesmo)
+
 st.markdown("""
 Este simulador calcula e compara o **valor líquido mensal estimado** entre contratação **CLT e PJ**.
 
@@ -87,7 +87,7 @@ descontos_clt_total = desconto_inss + desconto_irrf
 # Remuneração Líquida Efetiva CLT (Valor Alvo para o PJ)
 salario_clt_liquido_com_beneficios = salario_clt - descontos_clt_total + alimentacao + plano_saude - transporte_clt
 
-# --- INÍCIO DA NOVA LÓGICA DE CÁLCULO PJ ---
+# --- INÍCIO DA LÓGICA DE CÁLCULO PJ ---
 
 # 1. Encargos CLT que viram "custo de oportunidade" para o PJ
 decimo_terceiro_mensal = salario_clt / 12
@@ -138,7 +138,6 @@ with col1:
     st.markdown(f"(-) Deslocamento: R$ {transporte_clt:,.2f}")
     st.markdown(f"**Total Descontos:** R$ {transporte_clt + desconto_irrf + desconto_inss:,.2f}")
     st.metric("Salário CLT Líquido Final (com benefícios)", f"R$ {salario_clt_liquido_com_beneficios:,.2f}", delta_color="off")
-    st.metric("Estimativa Anual Líquida CLT", f"R$ {salario_clt_liquido_com_beneficios * 12:,.2f}", delta_color="off")
 
 with col2:
     st.metric("Salário PJ Bruto Mínimo Equivalente", f"R$ {salario_pj_bruto_equivalente:,.2f}")
@@ -147,7 +146,6 @@ with col2:
     st.metric("Salário PJ Líquido Estimado", f"R$ {salario_pj_liquido:,.2f}", 
               delta=f"{salario_pj_liquido - salario_clt_liquido_com_beneficios:,.2f} vs CLT",
               help="A diferença para o líquido CLT ocorre por arredondamentos. O objetivo é que seja próximo de zero.")
-    st.metric("Estimativa Anual Líquida PJ", f"R$ {salario_pj_liquido * 12:,.2f}", delta_color="off")
 
 # --- Comparativo gráfico
 st.subheader("Comparativo de Ganhos Líquidos Mensais")
