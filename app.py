@@ -8,6 +8,7 @@ LIMITE_MEI_MENSAL = 6750.00
 LIMITE_SIMPLES_MENSAL = 30000.00
 
 salario_pj_bruto_equivalente = 1000# Temporario
+salario_pj_liquido = 1000
 
 # --- Funções de Cálculo de Impostos
 def calcular_inss(salario_bruto):
