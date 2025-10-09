@@ -165,9 +165,7 @@ fig.add_trace(go.Bar(
     text=[f"R$ {v:,.2f}" for v in dados["Valor (R$)"]],
     textposition='outside',
     marker_color=['#1f77b4', '#2ca02c'],
-    # CORREÇÃO: A string do hovertemplate foi colocada em uma única linha.
-    hovertemplate='%{x}  
-<b>R$ %{y:,.2f}</b><extra></extra>',
+    hovertemplate='%{x}<b>R$ %{y:,.2f}</b><extra></extra>',
 ))
 
 # Ajuste dinâmico do eixo Y para garantir que o rótulo não seja cortado
