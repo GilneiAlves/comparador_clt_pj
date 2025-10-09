@@ -108,13 +108,13 @@ with col1:
     st.markdown(f"**Total Descontos:** R$ {transporte_clt + desconto_irrf + desconto_inss:,.2f}")
     st.metric("Salário CLT Líquido Final (com benefícios)", f"R$ {salario_clt_liquido_com_beneficios:,.2f}", delta_color="off")
 
-with col2:
-    st.metric("Salário PJ Bruto Mínimo Equivalente", f"R$ {salario_pj_bruto_equivalente:,.2f}")
-    st.markdown(f"(-) Imposto Simples ({aliquota_simples}%): R$ {imposto_simples:,.2f}")
-    st.markdown(f"(-) Custos Totais Assumidos pelo PJ: R$ {soma_custos_pj:,.2f}")
-    st.metric("Salário PJ Líquido Estimado", f"R$ {salario_pj_liquido:,.2f}", 
-              delta=f"{salario_pj_liquido - salario_clt_liquido_com_beneficios:,.2f} vs CLT",
-              help="A diferença para o líquido CLT ocorre por arredondamentos. O objetivo é que seja próximo de zero.")
+#with col2:
+    #st.metric("Salário PJ Bruto Mínimo Equivalente", f"R$ {salario_pj_bruto_equivalente:,.2f}")
+    #st.markdown(f"(-) Imposto Simples ({aliquota_simples}%): R$ {imposto_simples:,.2f}")
+    #st.markdown(f"(-) Custos Totais Assumidos pelo PJ: R$ {soma_custos_pj:,.2f}")
+    #t.metric("Salário PJ Líquido Estimado", f"R$ {salario_pj_liquido:,.2f}", 
+     #         delta=f"{salario_pj_liquido - salario_clt_liquido_com_beneficios:,.2f} vs CLT",
+     #         help="A diferença para o líquido CLT ocorre por arredondamentos. O objetivo é que seja próximo de zero.")
 
 # --- Comparativo gráfico
 st.subheader("Comparativo de Ganhos Líquidos Mensais")
