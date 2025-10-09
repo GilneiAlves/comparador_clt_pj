@@ -5,7 +5,9 @@ import plotly.graph_objects as go
 # --- Constantes para o cálculo avançado do PJ ---
 LIMITE_MEI_MENSAL = 6750.00
 # Limite mensal simbólico para a regra de cálculo. Ajuste se necessário.
-LIMITE_SIMPLES_MENSAL = 30000.00 
+LIMITE_SIMPLES_MENSAL = 30000.00
+
+salario_pj_bruto_equivalente = 1000# Temporario
 
 # --- Funções de Cálculo de Impostos
 def calcular_inss(salario_bruto):
