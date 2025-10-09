@@ -149,7 +149,7 @@ with col2:
               help="A diferença para o líquido CLT ocorre por arredondamentos. O objetivo é que seja próximo de zero.")
     st.metric("Estimativa Anual Líquida PJ", f"R$ {salario_pj_liquido * 12:,.2f}", delta_color="off")
 
-# --- Comparativo gráfico (seu código Plotly, sem alterações) ---
+# --- Comparativo gráfico
 st.subheader("Comparativo de Ganhos Líquidos Mensais")
 dados = pd.DataFrame({
     "Categoria": ["CLT Líquido + Benefícios", "PJ Líquido"],
@@ -157,26 +157,42 @@ dados = pd.DataFrame({
 })
 
 fig = go.Figure()
+
+# Adiciona as barras
 fig.add_trace(go.Bar(
     x=dados["Categoria"],
     y=dados["Valor (R$)"],
     text=[f"R$ {v:,.2f}" for v in dados["Valor (R$)"]],
     textposition='outside',
     marker_color=['#1f77b4', '#2ca02c'],
+    # CORREÇÃO: A string do hovertemplate foi colocada em uma única linha.
     hovertemplate='%{x}  
 <b>R$ %{y:,.2f}</b><extra></extra>',
 ))
-y_max = dados["Valor (R$)"].max() * 1.25
+
+# Ajuste dinâmico do eixo Y para garantir que o rótulo não seja cortado
+y_max = dados["Valor (R$)"].max() * 1.25 
+
+# Layout geral
 fig.update_layout(
-    title={'text': 'Comparativo de Modalidades de Contratação', 'x': 0.5, 'xanchor': 'center', 'font': {'size': 20}},
+    title={
+        'text': 'Comparativo de Modalidades de Contratação',
+        'x': 0.5,
+        'xanchor': 'center',
+        'font': {'size': 20}
+    },
     xaxis_title='Modalidade de Contratação',
     yaxis_title='Valor Líquido Mensal (R$)',
-    yaxis=dict(showgrid=False, range=[0, y_max]),
+    yaxis=dict(
+        showgrid=False,
+        range=[0, y_max]  # Adiciona a margem superior
+    ),
     xaxis=dict(showgrid=False),
     plot_bgcolor='rgba(0,0,0,0)',
     paper_bgcolor='rgba(0,0,0,0)',
     font=dict(size=14),
 )
+
 st.plotly_chart(fig, use_container_width=True)
 
 st.markdown("---")
